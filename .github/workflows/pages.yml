@@ -1,4 +1,5 @@
 # Build-free GitHub Pages: upload the standalone /rag_model_site static site
+# One-time: enable Pages with "GitHub Actions" as source (or: gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow)
 name: Deploy GitHub Pages
 
 on:
@@ -27,9 +28,6 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          # Enable Actions-based Pages on first run (avoids configure-pages 404 / Not Found)
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
