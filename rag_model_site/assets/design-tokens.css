@@ -1,0 +1,131 @@
+/*
+  RAG Model Field Guide design tokens
+
+  Layer 1: primitive tokens are raw values.
+  Layer 2: semantic tokens describe purpose.
+  Layer 3: component tokens map semantics into UI parts.
+*/
+
+:root {
+  /* Primitive: color */
+  --primitive-cream-50: oklch(0.98 0.01 85);
+  --primitive-ink-900: oklch(0.22 0.02 260);
+  --primitive-ink-600: oklch(0.45 0.02 260);
+  --primitive-blue-650: oklch(0.5 0.12 250);
+  --primitive-white: oklch(1 0 0);
+
+  /* Primitive: spacing */
+  --primitive-space-1: 0.25rem;
+  --primitive-space-2: 0.5rem;
+  --primitive-space-3: 0.75rem;
+  --primitive-space-5: 1.25rem;
+  --primitive-space-8: 2rem;
+  --primitive-space-12: 3rem;
+  --primitive-space-16: 4rem;
+  --primitive-space-24: 6rem;
+
+  /* Primitive: radius */
+  --primitive-radius-sm: 0.2rem;
+  --primitive-radius-md: 0.35rem;
+  --primitive-radius-lg: 0.4rem;
+  --primitive-radius-pill: 999px;
+
+  /* Primitive: typography */
+  --primitive-font-serif: "Literata", Georgia, serif;
+  --primitive-font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --primitive-font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --primitive-line-body: 1.55;
+  --primitive-line-heading: 1.2;
+  --primitive-max-read: 72ch;
+
+  /* Primitive: motion */
+  --primitive-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --primitive-duration-fast: 120ms;
+  --primitive-duration-base: 200ms;
+  --primitive-duration-slow: 320ms;
+
+  /* Semantic: color */
+  --color-bg: var(--primitive-cream-50);
+  --color-surface: color-mix(in oklch, var(--color-bg) 97%, var(--primitive-white));
+  --color-surface-raised: color-mix(in oklch, var(--color-bg) 92%, var(--primitive-white));
+  --color-text: var(--primitive-ink-900);
+  --color-text-muted: var(--primitive-ink-600);
+  --color-border: color-mix(in oklch, var(--color-text) 18%, var(--color-bg));
+  --color-accent: var(--primitive-blue-650);
+  --color-accent-soft: color-mix(in oklch, var(--color-accent) 15%, var(--color-bg));
+  --color-code-bg: color-mix(in oklch, var(--color-text) 6%, var(--color-bg));
+  --color-tag-bg: color-mix(in oklch, var(--color-text) 7%, var(--color-bg));
+  --color-link: var(--color-accent);
+  --color-link-hover: color-mix(in oklch, var(--color-accent) 80%, var(--color-text));
+
+  /* Semantic: typography */
+  --font-display: var(--primitive-font-serif);
+  --font-body: var(--primitive-font-sans);
+  --font-mono: var(--primitive-font-mono);
+  --line-body: var(--primitive-line-body);
+  --line-heading: var(--primitive-line-heading);
+  --measure-readable: var(--primitive-max-read);
+
+  /* Semantic: spacing aliases used by current components */
+  --space-xs: var(--primitive-space-1);
+  --space-sm: var(--primitive-space-2);
+  --space-md: var(--primitive-space-3);
+  --space-lg: var(--primitive-space-5);
+  --space-xl: var(--primitive-space-8);
+  --space-2xl: var(--primitive-space-12);
+  --space-3xl: var(--primitive-space-16);
+  --space-4xl: var(--primitive-space-24);
+
+  /* Semantic: elevation */
+  --shadow-soft: 0 1px 0 color-mix(in oklch, var(--color-text) 8%, transparent),
+    0 12px 32px -16px color-mix(in oklch, var(--color-text) 15%, transparent);
+  --shadow-hairline: 0 1px 0 color-mix(in oklch, var(--color-text) 6%, transparent);
+  --shadow-card-hover: 0 1px 0 color-mix(in oklch, var(--color-text) 8%, transparent),
+    0 18px 40px -22px color-mix(in oklch, var(--color-text) 22%, transparent);
+
+  /* Semantic: motion */
+  --motion-ease: var(--primitive-ease-out);
+  --motion-fast: var(--primitive-duration-fast);
+  --motion-base: var(--primitive-duration-base);
+  --motion-slow: var(--primitive-duration-slow);
+
+  /* Component: page */
+  --page-bg: var(--color-bg);
+  --page-text: var(--color-text);
+  --page-grid-line: color-mix(in oklch, var(--color-border) 25%, transparent);
+
+  /* Component: panels and cards */
+  --panel-bg: var(--color-surface);
+  --panel-border: var(--color-border);
+  --panel-radius: var(--primitive-radius-lg);
+  --panel-shadow: var(--shadow-hairline);
+  --card-bg: var(--color-bg);
+  --card-hover-shadow: var(--shadow-soft);
+
+  /* Component: controls */
+  --control-bg: var(--color-bg);
+  --control-text: var(--color-text);
+  --control-text-muted: var(--color-text-muted);
+  --control-border: var(--color-border);
+  --control-radius: var(--primitive-radius-md);
+  --control-focus: var(--color-accent);
+  --control-active-bg: var(--color-accent-soft);
+
+  /* Component: tags and code */
+  --tag-bg: var(--color-tag-bg);
+  --tag-radius: var(--primitive-radius-sm);
+  --code-bg: var(--color-code-bg);
+  --code-radius: var(--primitive-radius-sm);
+
+  /*
+    Backward-compatible aliases. styles.css still uses short names in places,
+    but their source is now the design-token layer above.
+  */
+  --paper: var(--page-bg);
+  --ink: var(--page-text);
+  --ink-muted: var(--color-text-muted);
+  --rule: var(--color-border);
+  --accent: var(--color-accent);
+  --accent-soft: var(--color-accent-soft);
+  --max-read: var(--measure-readable);
+}
