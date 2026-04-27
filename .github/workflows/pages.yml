@@ -27,6 +27,9 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        with:
+          # Enable Actions-based Pages on first run (avoids configure-pages 404 / Not Found)
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
