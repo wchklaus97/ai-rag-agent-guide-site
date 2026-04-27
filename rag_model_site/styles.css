@@ -48,19 +48,37 @@ h3,
 }
 
 h1 {
-  font-size: clamp(2rem, 4.6vw, 2.85rem);
+  font-size: clamp(2.1rem, 4.8vw, 2.95rem);
+  font-weight: 650;
   margin: 0 0 var(--space-sm);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  background: linear-gradient(
+    125deg,
+    var(--color-text) 0%,
+    color-mix(in oklch, var(--color-text) 88%, var(--s-color-accent)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@supports not (background-clip: text) {
+  h1 {
+    color: var(--color-text);
+    background: none;
+  }
 }
 
 h2 {
-  font-size: 0.78rem;
+  font-size: var(--type-section-size, 0.8125rem);
   margin: 0 0 var(--space-md);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 700;
+  letter-spacing: var(--type-section-tracking, 0.08em);
+  font-weight: var(--type-section-weight, 650);
   font-family: var(--font-body);
-  color: var(--color-text-muted);
+  color: var(--type-section-color, var(--color-text-muted));
+  line-height: 1.35;
 }
 
 h3,
@@ -124,9 +142,19 @@ code {
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--panel-border);
-  background: color-mix(in oklch, var(--color-bg) 86%, transparent);
-  backdrop-filter: saturate(140%) blur(8px);
-  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  background: var(--s-color-header-scrim, color-mix(in oklch, var(--color-bg) 86%, transparent));
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+}
+
+.site-header::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--panel-accent-bar, linear-gradient(90deg, var(--s-color-accent), transparent 62%));
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 .header-inner {
@@ -173,7 +201,39 @@ code {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Theme toggle — component tokens */
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 1px solid var(--control-border);
+  border-radius: var(--p-r-pill, var(--primitive-radius-pill));
+  background: var(--control-bg);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-hairline);
+  transition: background var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease);
+}
+
+.theme-btn:hover {
+  border-color: color-mix(in oklch, var(--control-focus) 40%, var(--control-border));
+  transform: translateY(-1px);
+}
+
+.theme-btn:focus-visible {
+  outline: 2px solid var(--control-focus);
+  outline-offset: 2px;
 }
 
 /* ==== Language toggle =================================================== */
@@ -228,8 +288,10 @@ code {
 
 .panel {
   padding: var(--space-xl);
+  padding-left: calc(var(--space-xl) - 2px);
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
+  border-left: 3px solid color-mix(in oklch, var(--s-color-accent) 45%, var(--panel-border));
   border-radius: var(--panel-radius);
   box-shadow: var(--panel-shadow);
 }
@@ -573,7 +635,7 @@ code {
   color: var(--color-text-muted);
   border: 1px dashed var(--panel-border);
   border-radius: var(--panel-radius);
-  background: color-mix(in oklch, var(--color-bg) 80%, white);
+  background: color-mix(in oklch, var(--color-bg) 88%, var(--color-surface-raised));
 }
 
 /* ==== Footer ============================================================ */
@@ -584,7 +646,7 @@ code {
   text-align: center;
   color: var(--color-text-muted);
   font-size: 0.88rem;
-  background: color-mix(in oklch, var(--color-bg) 90%, white);
+  background: color-mix(in oklch, var(--color-bg) 94%, var(--color-surface-raised));
 }
 
 .footer-note {
@@ -734,7 +796,7 @@ code {
   border-radius: var(--panel-radius);
   padding: var(--space-md);
   margin: 0;
-  background: color-mix(in oklch, var(--color-bg) 85%, white);
+  background: color-mix(in oklch, var(--color-bg) 85%, var(--color-surface-raised));
 }
 
 .wizard-step legend {

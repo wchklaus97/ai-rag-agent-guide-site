@@ -1,72 +1,40 @@
 {
+  "$comment": "Three-layer design tokens (mirrors assets/design-tokens.css).",
   "primitive": {
     "color": {
-      "cream50": "oklch(0.98 0.01 85)",
-      "ink900": "oklch(0.22 0.02 260)",
-      "ink600": "oklch(0.45 0.02 260)",
-      "blue650": "oklch(0.5 0.12 250)",
-      "white": "oklch(1 0 0)"
+      "paper": { "0": "oklch light paper", "1": "oklch subtle", "2": "oklch stripe" },
+      "ink": { "950": "headings", "800": "borders", "600": "muted", "500": "faint" },
+      "violet": { "400": "dark link", "500": "soft mix", "600": "accent" },
+      "white": "elevated card (light) / base (dark)"
     },
-    "space": {
-      "1": "0.25rem",
-      "2": "0.5rem",
-      "3": "0.75rem",
-      "5": "1.25rem",
-      "8": "2rem",
-      "12": "3rem"
-    },
-    "radius": {
-      "sm": "0.2rem",
-      "md": "0.35rem",
-      "lg": "0.4rem",
-      "pill": "999px"
-    },
-    "typography": {
-      "fontSerif": "\"Literata\", Georgia, serif",
-      "fontSans": "\"Atkinson Hyperlegible\", system-ui, sans-serif",
-      "lineBody": "1.55",
-      "lineHeading": "1.2",
-      "maxRead": "72ch"
+    "space": { "1": "0.25rem", "2": "0.5rem", "3": "0.75rem", "4": "1rem", "5": "1.25rem", "6": "1.5rem", "8": "2rem", "10": "2.5rem", "12": "3rem", "16": "4rem", "20": "5rem", "24": "6rem" },
+    "radius": { "sm": "0.2rem", "md": "0.4rem", "lg": "0.55rem", "xl": "0.75rem", "pill": "999px" },
+    "fontFamily": {
+      "display": "Fraunces",
+      "body": "Source Sans 3",
+      "mono": "IBM Plex Mono"
     }
   },
   "semantic": {
-    "color": {
-      "bg": "var(--primitive-cream-50)",
-      "surface": "color-mix(in oklch, var(--color-bg) 97%, var(--primitive-white))",
-      "surfaceRaised": "color-mix(in oklch, var(--color-bg) 92%, var(--primitive-white))",
-      "text": "var(--primitive-ink-900)",
-      "textMuted": "var(--primitive-ink-600)",
-      "border": "color-mix(in oklch, var(--color-text) 18%, var(--color-bg))",
-      "accent": "var(--primitive-blue-650)",
-      "accentSoft": "color-mix(in oklch, var(--color-accent) 15%, var(--color-bg))"
+    "light": {
+      "paper": "{primitive.color.paper.0}",
+      "elevated": "{primitive.color.white}",
+      "ink": "{primitive.color.ink.950}",
+      "accent": "{primitive.color.violet.600}",
+      "border": "color-mix ink + paper"
     },
-    "typography": {
-      "display": "var(--primitive-font-serif)",
-      "body": "var(--primitive-font-sans)",
-      "readableMeasure": "var(--primitive-max-read)"
+    "dark": {
+      "paper": "oklch ~0.17 0.035 275",
+      "elevated": "oklch ~0.24 0.04 275",
+      "ink": "oklch ~0.96 (light text)",
+      "accent": "oklch ~0.72 violet (higher for contrast)"
     }
   },
   "component": {
-    "panel": {
-      "background": "var(--color-surface)",
-      "border": "var(--color-border)",
-      "radius": "var(--primitive-radius-lg)",
-      "shadow": "var(--shadow-hairline)"
-    },
-    "control": {
-      "background": "var(--color-bg)",
-      "text": "var(--color-text)",
-      "border": "var(--color-border)",
-      "activeBackground": "var(--color-accent-soft)",
-      "focus": "var(--color-accent)"
-    },
-    "card": {
-      "background": "var(--color-bg)",
-      "hoverShadow": "var(--shadow-soft)"
-    },
-    "tag": {
-      "background": "var(--color-tag-bg)",
-      "radius": "var(--primitive-radius-sm)"
-    }
+    "page": ["--page-bg", "--page-text", "--page-grid-line"],
+    "panel": ["--panel-bg", "--panel-border", "--panel-radius", "--panel-shadow", "--panel-accent-bar"],
+    "card": ["--card-bg", "hover uses --shadow-card-hover"],
+    "control": ["--control-bg", "--control-border", "--control-focus", "--control-active-bg"],
+    "code": ["--code-bg", "--code-radius"]
   }
 }

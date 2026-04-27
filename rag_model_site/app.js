@@ -13,6 +13,7 @@ const state = {
 };
 
 const STORAGE_KEY = "rag-field-guide-lang";
+const THEME_KEY = "rag-field-guide-theme";
 
 function loadLang() {
   try {
@@ -123,6 +124,48 @@ function applyI18nToDom() {
   }
   const sl = document.querySelector("label[for='search-input']");
   if (sl && u.searchLabel) sl.textContent = u.searchLabel;
+  syncThemeButton();
+}
+
+function currentTheme() {
+  return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+}
+
+function setTheme(next) {
+  if (next !== "light" && next !== "dark") return;
+  document.documentElement.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem(THEME_KEY, next);
+  } catch {
+    /* ignore */
+  }
+  const meta = document.getElementById("meta-theme-color");
+  if (meta) {
+    meta.setAttribute("content", next === "dark" ? "#1b1628" : "#f7f4ef");
+  }
+  syncThemeButton();
+}
+
+function syncThemeButton() {
+  const btn = document.getElementById("theme-toggle");
+  const icon = btn?.querySelector(".theme-btn__icon");
+  if (!btn) return;
+  const dark = currentTheme() === "dark";
+  if (icon) icon.textContent = dark ? "☼" : "☾";
+  const hasUi = state.data?.ui?.[state.lang];
+  btn.setAttribute(
+    "aria-label",
+    hasUi ? (dark ? t("themeToLight") : t("themeToDark")) : dark ? "Light theme" : "Dark theme",
+  );
+  btn.setAttribute("aria-pressed", dark ? "true" : "false");
+}
+
+function wireTheme() {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    setTheme(currentTheme() === "dark" ? "light" : "dark");
+  });
 }
 
 function renderRecommendations() {
@@ -531,6 +574,7 @@ async function init() {
   if (agentRes?.ok) {
     state.agentGuide = await agentRes.json();
   }
+  wireTheme();
   wireLang();
   applyI18nToDom();
   renderRecommendations();
