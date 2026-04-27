@@ -1,0 +1,10 @@
+[project]
+name = "ai-rag-agent-guide-site"
+version = "0.1.0"
+description = "Static OpenRouter embedding models field guide (GitHub Pages)."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = []
